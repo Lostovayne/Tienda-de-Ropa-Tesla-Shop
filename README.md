@@ -17,6 +17,12 @@ El proyecto tiene los siguientes scripts que puedes ejecutar:
 - `start`: Inicia el servidor de producción de Next.js.
 - `lint`: Ejecuta el linter del proyecto.
 
+## Demo 
+
+![img](https://github.com/Lostovayne/Tienda-de-Ropa-Tesla-Shop-usando-Next-14/assets/92962731/6ca0c7c0-9e3d-4e05-bd38-c8db012019a8)
+
+
+
 ## Dependencias
 
 El proyecto utiliza las siguientes dependencias:
