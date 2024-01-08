@@ -5,7 +5,7 @@ import { IoSearchOutline, IoCartOutline } from "react-icons/io5";
 
 export const TopMenu = () => {
     return (
-        <nav className="flex px-5 justify-between items-center w-full">
+        <nav className="flex px-5 justify-between items-center w-full mt-1">
             <div>
                 <Link href="/">
                     <span className={`${titleFont.className} antialiased font-bold`}>Tesla</span>
@@ -38,9 +38,9 @@ export const TopMenu = () => {
 
             {/* Search, Cart, Menu */}
 
-            <div className="flex items-center gap-1">
-                <Link href="/search">
-                    <IoSearchOutline className="w-6 h-6" />
+            <div className="flex items-center gap-3">
+                <Link href="/search" className="mr-1">
+                    <IoSearchOutline className="w-5 h-5" />
                 </Link>
                 <Link href="/cart">
                     <div className="relative">
@@ -48,13 +48,13 @@ export const TopMenu = () => {
                             {" "}
                             3
                         </span>
-                        <IoCartOutline className="w-6 h-6" />
+                        <IoCartOutline className="w-5 h-5" />
                     </div>
                 </Link>
 
                 {/* Menu */}
 
-                <button className="m-2 p-2 font-medium rounded-md transition-all hover:bg-gray-100">
+                <button className=" p-2 font-medium rounded-md transition-all hover:bg-gray-100">
                     Menú
                 </button>
             </div>

@@ -1,10 +1,13 @@
-import Image from "next/image";
+import { ProductGrid, Title } from "@/components";
+import { initialData } from "@/seed/seed";
+
+const products = initialData.products;
 
 export default function Home() {
     return (
-        <div>
-            <h1>Shop Page</h1>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </div>
+        <>
+            <Title title="Tienda" subtitle="Todos los productos" />
+            <ProductGrid products={products} />
+        </>
     );
 }
