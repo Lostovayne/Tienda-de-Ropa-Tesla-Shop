@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Teslo-Shop
 
-## Getting Started
+## Descripción
 
-First, run the development server:
+Teslo-Shop es un proyecto de comercio electrónico construido con Next.js, React y Tailwind CSS.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Versión
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+La versión actual del proyecto es 0.1.0.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+El proyecto tiene los siguientes scripts que puedes ejecutar:
 
-## Learn More
+- `dev`: Inicia el servidor de desarrollo de Next.js.
+- `build`: Crea la versión de producción del proyecto.
+- `start`: Inicia el servidor de producción de Next.js.
+- `lint`: Ejecuta el linter del proyecto.
 
-To learn more about Next.js, take a look at the following resources:
+## Dependencias
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+El proyecto utiliza las siguientes dependencias:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `clsx`: ^2.1.0
+- `next`: 14.0.4
+- `react`: ^18
+- `react-dom`: ^18
+- `react-icons`: ^4.12.0
+- `tailwind-merge`: ^2.2.0
 
-## Deploy on Vercel
+## Dependencias de desarrollo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+El proyecto utiliza las siguientes dependencias de desarrollo:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `@types/node`: ^20
+- `@types/react`: ^18
+- `@types/react-dom`: ^18
+- `autoprefixer`: ^10.0.1
+- `eslint`: ^8
+- `eslint-config-next`: 14.0.4
+- `postcss`: ^8
+- `tailwindcss`: ^3.3.0
+- `typescript`: ^5
+
+## Licencia
+
+Este proyecto es privado.
