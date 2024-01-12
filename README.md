@@ -48,6 +48,20 @@ El proyecto utiliza las siguientes dependencias de desarrollo:
 - `tailwindcss`: ^3.3.0
 - `typescript`: ^5
 
+## Estructura de Carpetas
+
+-app - carpeta de la aplicación
+-components - carpeta de componentes
+-config - carpeta de configuración
+-public - carpeta de archivos estáticos
+-lib - carpeta de bibliotecas
+-auth - carpeta de autenticación
+-shop - carpeta de tienda
+
+
+
+
+
 ## Licencia
 
 Este proyecto es privado.
