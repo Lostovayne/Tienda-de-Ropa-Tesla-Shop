@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { initialData } from "../../../../seed/seed";
 import { cn } from "@/lib/twMerge";
 import { titleFont } from "@/config/fonts";
-import { QuantitySelector, SizeSelector } from "@/components";
+import { ProductSlideshow, QuantitySelector, SizeSelector } from "@/components";
 interface Props {
     params: {
         slug: string;
@@ -18,16 +18,20 @@ export default function ProductPage({ params }: Props) {
     }
 
     return (
-        <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
+        <section className="mt-5 mb-20 grid grid-cols-1 xl:grid-cols-3 gap-3">
             {/* Slideshow */}
 
-            <div className="col-span-1 md:col-span-2 bg-red-100">
-                <div>xd</div>
+            <div className="col-span-1 xl:col-span-2 ">
+                <ProductSlideshow
+                    title={product.title}
+                    images={product.images}
+                    className="max-w-2xl mx-auto "
+                />
             </div>
 
             {/* Detalles */}
 
-            <div className="col-span-1 px-5 ">
+            <div className="col-span-1 px-5 xl:mt-12 ">
                 <h1 className={cn("text-xl font-bold antialiased", titleFont.className)}>
                     {product.title}
                 </h1>
@@ -48,6 +52,6 @@ export default function ProductPage({ params }: Props) {
                 <h3 className="font-bold text-sm">Descripción</h3>
                 <p className="font-normal text-base">{product.description}</p>
             </div>
-        </div>
+        </section>
     );
 }
