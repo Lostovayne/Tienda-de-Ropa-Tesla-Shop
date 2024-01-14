@@ -22,7 +22,6 @@ export default function CategoryPage({ params: { id } }: Props) {
     // if (id === "kids") {
     //     notFound();
     // }
-    console.log(id);
 
     const productsFilters = products.filter((product) => product.gender === id);
 
