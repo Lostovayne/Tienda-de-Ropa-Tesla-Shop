@@ -1,4 +1,4 @@
-import { Sidebar, TopMenu } from "@/components";
+import { Footer, Sidebar, TopMenu } from "@/components";
 
 export const metadata = {
     title: "Shop | Tesla",
@@ -10,6 +10,7 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
             <TopMenu />
             <Sidebar />
             <div className="px-4 sm:px-10"> {children}</div>
+            <Footer />
         </main>
     );
 }
