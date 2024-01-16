@@ -8,6 +8,27 @@ Teslo-Shop es un proyecto de comercio electrónico construido con Next.js, React
 
 La versión actual del proyecto es 0.1.0.
 
+## Correr el proyecto
+
+- Clonar el repositorio
+- Instalar las dependencias `pnpm install`
+- Ejecutar el script `pnpm dev`
+- Abrir el navegador en http://localhost:3000
+- Copiar las variables de .env.example en .env
+- Agregar los valores a las variables de entorno
+- Levantar el contenedor de docker ```docker compose up -d```
+
+## Prisma se está utilizando como ORM , sus comandos son 
+- [Prisma](https://prisma.io)
+- Instalacion de Prisma  `pnpm install prisma --save-dev`
+- Inicializar Prisma `pnpm dlx prisma init --datasource-provider PostgreSQL`
+- Crear el Schema de Prisma 
+- Si ya se tiene una base de datos puede usarse el comando `pnpm prisma db pull` para crear el Schema basado en ella
+- Ejecutar el comando para la migracion `pnpm dlx prisma migrate dev --name nombreMigra`
+
+
+
+
 ## Scripts
 
 El proyecto tiene los siguientes scripts que puedes ejecutar:
