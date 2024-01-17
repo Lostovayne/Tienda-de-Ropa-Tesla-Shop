@@ -27,7 +27,10 @@ La versión actual del proyecto es 0.1.0.
 - Si ya se tiene una base de datos puede usarse el comando `pnpm prisma db pull` para crear el Schema basado en ella
 - Ejecutar el comando para la migracion `pnpm dlx prisma migrate dev --name nombreMigra`
 
-
+## El proyecto usa un mini servidor de Node para la seed en base de datos.
+- Se instaló ts-node para ejecutar el script de Typescripts
+- `pnpm seed`
+- Esto corre el script que limpia la base de datos y agrega la data nueva
 
 
 ## Scripts
