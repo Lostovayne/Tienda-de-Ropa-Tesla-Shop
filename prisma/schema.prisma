@@ -17,6 +17,7 @@ enum Size {
     L
     XL
     XXL
+    XXXL
 }
 
 enum Gender {
@@ -35,7 +36,6 @@ model Category {
 model Product {
     id           String         @id @default(uuid())
     title        String
-    name         String
     description  String
     inStock      Int
     price        Float          @default(0)
