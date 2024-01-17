@@ -24,6 +24,7 @@ La versión actual del proyecto es 0.1.0.
 - Instalacion de Prisma  `pnpm install prisma --save-dev`
 - Inicializar Prisma `pnpm dlx prisma init --datasource-provider PostgreSQL`
 - Crear el Schema de Prisma 
+- Crear el Cliente de Prisma
 - Si ya se tiene una base de datos puede usarse el comando `pnpm prisma db pull` para crear el Schema basado en ella
 - Ejecutar el comando para la migracion `pnpm dlx prisma migrate dev --name nombreMigra`
 
