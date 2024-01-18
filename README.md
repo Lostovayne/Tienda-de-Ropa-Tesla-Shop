@@ -12,12 +12,13 @@ La versión actual del proyecto es 0.1.0.
 
 - Clonar el repositorio
 - Instalar las dependencias `pnpm install`
-- Abrir el navegador en http://localhost:3000
 - Copiar las variables de .env.example en .env
 - Agregar los valores a las variables de entorno
 - Levantar el contenedor de docker ```docker compose up -d```
+- Migrar la BD para la seed
 - Ejecutar seed `pnpm seed`
 - Ejecutar el script `pnpm dev`
+- Abrir el navegador en http://localhost:3000
 
 ## Prisma se está utilizando como ORM , sus comandos son 
 - [Prisma](https://prisma.io)

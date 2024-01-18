@@ -1,7 +1,6 @@
-import { Title, ProductGrid } from "@/components";
-import { notFound } from "next/navigation";
-import { initialData } from "@/seed/seed";
+import { ProductGrid, Title } from "@/components";
 import { Category } from "@/interfaces/product.interface";
+import { initialData } from "@/seed/seed";
 
 interface Props {
     params: {
@@ -9,7 +8,7 @@ interface Props {
     };
 }
 
-const products = initialData.products;
+// const products = initialData.products;
 
 export default function CategoryPage({ params: { id } }: Props) {
     const label: Record<Category, string> = {
@@ -23,15 +22,12 @@ export default function CategoryPage({ params: { id } }: Props) {
     //     notFound();
     // }
 
-    const productsFilters = products.filter((product) => product.gender === id);
+    // const productsFilters = products.filter((product) => product.gender === id);
 
     return (
         <>
-            <Title
-                title={`Articulos ${label[id]}`}
-                subtitle={`Todos los productos de ${label[id]}`}
-            />
-            <ProductGrid products={productsFilters} />
+            <Title title={`Articulos ${label[id]}`} subtitle={`Todos los productos de ${label[id]}`} />
+            {/* <ProductGrid products={productsFilters} /> */}
         </>
     );
 }
