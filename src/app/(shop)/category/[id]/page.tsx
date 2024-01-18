@@ -1,7 +1,6 @@
-import { Title, ProductGrid } from "@/components";
-import { notFound } from "next/navigation";
-import { initialData } from "@/seed/seed";
+import { ProductGrid, Title } from "@/components";
 import { Category } from "@/interfaces/product.interface";
+import { initialData } from "@/seed/seed";
 
 interface Props {
     params: {
@@ -27,10 +26,7 @@ export default function CategoryPage({ params: { id } }: Props) {
 
     return (
         <>
-            <Title
-                title={`Articulos ${label[id]}`}
-                subtitle={`Todos los productos de ${label[id]}`}
-            />
+            <Title title={`Articulos ${label[id]}`} subtitle={`Todos los productos de ${label[id]}`} />
             <ProductGrid products={productsFilters} />
         </>
     );
