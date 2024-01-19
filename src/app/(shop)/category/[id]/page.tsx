@@ -1,6 +1,6 @@
+import { getPaginateProductsWithImages } from "@/actions";
 import { ProductGrid, Title } from "@/components";
 import { Category } from "@/interfaces/product.interface";
-import { initialData } from "@/seed/seed";
 
 interface Props {
     params: {
@@ -8,9 +8,10 @@ interface Props {
     };
 }
 
-// const products = initialData.products;
-
-export default function CategoryPage({ params: { id } }: Props) {
+export default async function CategoryPage({ params }: Props) {
+    const { id } = params;
+    const { products } = await getPaginateProductsWithImages({});
+    // console.log(products);
     const label: Record<Category, string> = {
         men: "para Hombres",
         women: "para Mujeres",
@@ -22,8 +23,9 @@ export default function CategoryPage({ params: { id } }: Props) {
     //     notFound();
     // }
 
-    // const productsFilters = products.filter((product) => product.gender === id);
-
+    // const productosFiltrados = products.filter((product) => {
+    //     return product.gender === id;
+    // });
     return (
         <>
             <Title title={`Articulos ${label[id]}`} subtitle={`Todos los productos de ${label[id]}`} />
