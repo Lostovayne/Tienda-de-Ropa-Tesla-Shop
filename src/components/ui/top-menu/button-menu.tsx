@@ -7,10 +7,11 @@ export const ButtonMenu = () => {
 
     return (
         <button
+            type="button"
             onClick={openSideMenu}
-            className=" p-2 font-medium rounded-md transition-all hover:bg-gray-100"
+            className="rounded-md p-2 font-medium transition-all hover:bg-gray-100"
         >
-            Menú
+            Menu
         </button>
     );
 };
