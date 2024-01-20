@@ -1,6 +1,8 @@
 "use client";
+import { cn } from "@/lib/twMerge";
+import { generatePaginationNumbers } from "@/utils";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { redirect, usePathname, useSearchParams } from "next/navigation";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 
 interface Props {
@@ -11,10 +13,20 @@ export const Pagination = ({ totalPages }: Props) => {
     // Pagination usando los hooks
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const currentPage = Number(searchParams?.get("page")) ?? 1;
+
+    let pageString = searchParams?.get("page") ?? 1;
+    const currentPage = isNaN(+pageString) ? 1 : +pageString;
+
+    if (currentPage < 1 || isNaN(+pageString)) {
+        redirect(`${pathname}`);
+    }
+
+    //* Generacion de los numeros de la paginacion
+    const AllPages = generatePaginationNumbers(currentPage, totalPages);
 
     const createPageUrl = (pageNumber: number | string) => {
         const params = new URLSearchParams(searchParams);
+
         if (pageNumber === "...") {
             return `${pathname}?${params.toString()}`;
         }
@@ -32,45 +44,39 @@ export const Pagination = ({ totalPages }: Props) => {
     };
 
     return (
-        <div className="flex justify-center text-center mt-10 mb-32 ">
+        <div className="mb-32 mt-10 flex justify-center text-center">
             <nav aria-label="Page navigation example">
-                <ul className="flex list-style-none items-center">
+                <ul className="list-style-none flex items-center">
                     <li className="page-item">
                         <Link
-                            className="page-link relative block py-3 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300  text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                            className="page-link relative block rounded border-0 bg-transparent px-3 py-3 text-gray-800 outline-none transition-all duration-300 hover:bg-gray-200 hover:text-gray-800 focus:shadow-none"
                             href={createPageUrl(currentPage - 1)}
                             // aria-disabled="true"
                         >
                             <IoChevronBackOutline />
                         </Link>
                     </li>
+
+                    {AllPages.map((page, index) => (
+                        <li key={page + "-" + index} className="page-item">
+                            <Link
+                                className={cn(
+                                    "page-link relative block rounded border-0 bg-transparent px-3 py-1.5 text-gray-800 outline-none transition-all duration-300 hover:bg-gray-200 hover:text-gray-800 focus:shadow-none",
+                                    {
+                                        "bg-blue-600 text-white shadow-md hover:bg-blue-600 hover:text-white focus:shadow-md":
+                                            page === currentPage,
+                                    }
+                                )}
+                                href={createPageUrl(page)}
+                            >
+                                {page}
+                            </Link>
+                        </li>
+                    ))}
+
                     <li className="page-item">
                         <Link
-                            className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300  text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                            href="#"
-                        >
-                            1
-                        </Link>
-                    </li>
-                    <li className="page-item active">
-                        <Link
-                            className="page-link relative block py-1.5 px-3 rounded border-0 bg-blue-600 outline-none transition-all duration-300  text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
-                            href="#"
-                        >
-                            2 <span className="visually-hidden"></span>
-                        </Link>
-                    </li>
-                    <li className="page-item">
-                        <Link
-                            className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300  text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                            href="#"
-                        >
-                            3
-                        </Link>
-                    </li>
-                    <li className="page-item">
-                        <Link
-                            className="page-link relative block py-3 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300  text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                            className="page-link relative block rounded border-0 bg-transparent px-3 py-3 text-gray-800 outline-none transition-all duration-300 hover:bg-gray-200 hover:text-gray-800 focus:shadow-none"
                             href={createPageUrl(currentPage + 1)}
                         >
                             <IoChevronForwardOutline />

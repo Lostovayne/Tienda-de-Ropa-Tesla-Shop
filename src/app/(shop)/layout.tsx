@@ -6,7 +6,7 @@ export const metadata = {
 };
 export default function ShopLayout({ children }: { children: React.ReactNode }) {
     return (
-        <main className="min-h-screen max-w-[1600px] mx-auto ">
+        <main className="mx-auto min-h-screen max-w-[1400px]">
             <TopMenu />
             <Sidebar />
             <div className="px-4 sm:px-10"> {children}</div>
