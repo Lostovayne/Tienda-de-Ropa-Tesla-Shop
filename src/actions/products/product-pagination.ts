@@ -29,13 +29,17 @@ export const getPaginateProductsWithImages = async ({ page = 1, take = 12, gende
                 },
             },
             where: {
-                gender,
+                gender: gender,
             },
         });
 
-        // 2. Obtener el numero de paginas
+        // 2. Obtener el numero de paginas total u tambien el total por genero
         // todo:
-        const totalCount = await prisma.product.count({});
+        const totalCount = await prisma.product.count({
+            where: {
+                gender: gender,
+            },
+        });
         const totalPages = Math.ceil(totalCount / take);
         return {
             currentPage: page,

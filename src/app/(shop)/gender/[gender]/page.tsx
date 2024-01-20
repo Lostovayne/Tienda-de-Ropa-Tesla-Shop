@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import { getPaginateProductsWithImages } from "@/actions";
 import { Pagination, ProductGrid, Title } from "@/components";
 import { Gender } from "@prisma/client";
@@ -21,12 +23,11 @@ export default async function CategoryPage({ params: { gender }, searchParams }:
 
     //* Recibe el page de los SearchParams si no es valido la funcion lo redirecciona al path principal
 
-    const { products } = await getPaginateProductsWithImages({ page, gender });
+    const { products, currentPage, totalPage } = await getPaginateProductsWithImages({ page, gender });
 
     if (products.length === 0) {
         redirect("/");
     }
-    const totalPage = Math.ceil(products.length / 12);
 
     const label: Record<Gender, string> = {
         men: "para Hombres",
