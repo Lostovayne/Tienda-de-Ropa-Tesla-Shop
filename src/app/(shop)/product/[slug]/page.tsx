@@ -1,17 +1,40 @@
-import { notFound } from "next/navigation";
-import { initialData } from "../../../../seed/seed";
-import { cn } from "@/lib/twMerge";
+import { ProductSlideshow, QuantitySelector, SizeSelector, StockLabel } from "@/components";
 import { titleFont } from "@/config/fonts";
-import { ProductSlideshow, QuantitySelector, SizeSelector } from "@/components";
+import { cn } from "@/lib/twMerge";
+import { notFound } from "next/navigation";
+// import { initialData } from "../../../../seed/seed";
+import { getProductBySlug } from "@/actions/products/get-product-by-slug";
+import { Metadata, ResolvingMetadata } from "next";
 interface Props {
     params: {
         slug: string;
     };
 }
 
-export default function ProductPage({ params }: Props) {
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+    // read route params
+    const slug = params.slug;
+
+    // fetch data
+    const product = await getProductBySlug(slug);
+
+    // optionally access and extend (rather than replace) parent metadata
+    // const previousImages = (await parent).openGraph?.images || [];
+
+    return {
+        title: product?.title,
+        description: product?.description,
+        openGraph: {
+            title: product?.title,
+            description: product?.description,
+            images: [`/products/${product?.images[1]}`],
+        },
+    };
+}
+
+export default async function ProductPage({ params }: Props) {
     const { slug } = params;
-    const product = initialData.products.find((product) => product.slug === slug);
+    const product = await getProductBySlug(slug);
 
     if (!product) {
         notFound();
@@ -32,9 +55,11 @@ export default function ProductPage({ params }: Props) {
             {/* Detalles */}
 
             <div className="col-span-1 px-5 xl:mt-12 ">
+                <StockLabel slug={product.slug} />
                 <h1 className={cn("text-xl font-bold antialiased", titleFont.className)}>
                     {product.title}
                 </h1>
+
                 <p className="text-lg mb-5 font-semibold">${product.price}</p>
 
                 {/* Selector de Tallas */}

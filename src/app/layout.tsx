@@ -1,10 +1,13 @@
-import type { Metadata } from "next";
-import "./globals.css";
 import { inter } from "@/config/fonts";
 import { cn } from "@/lib/twMerge";
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-    title: "Tesla | Shop",
+    title: {
+        template: "%s - Tesla | Shop",
+        default: "Tesla Shop",
+    },
     description: "Tienda de ropa online",
 };
 
