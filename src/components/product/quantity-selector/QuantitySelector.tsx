@@ -1,45 +1,43 @@
 "use client";
 
-import { useState } from "react";
-import { IoAddOutline, IoRemoveCircleOutline, IoRemoveOutline } from "react-icons/io5";
+import { IoAddOutline, IoRemoveOutline } from "react-icons/io5";
 
 interface Props {
-    quantity: number;
+  quantity: number;
+  onQuantityChanged: (value: number) => void;
 }
 
-export const QuantitySelector = ({ quantity }: Props) => {
-    const [count, setCount] = useState(quantity);
+export const QuantitySelector = ({ quantity, onQuantityChanged }: Props) => {
+  const onValueChanged = (value: number) => {
+    if (quantity + value < 1) {
+      return;
+    }
 
-    const onQuantityChange = (value: number) => {
-        if (count + value < 1) {
-            return;
-        }
+    if (quantity + value > 10) {
+      return;
+    }
+    onQuantityChanged(quantity + value);
+  };
 
-        if (count + value > 10) {
-            return;
-        }
-        setCount(count + value);
-    };
+  return (
+    <div>
+      <div className="flex items-center">
+        <button
+          className="border text-gray-700 border-gray-200 p-2 rounded-xl"
+          onClick={() => onValueChanged(-1)}
+        >
+          <IoRemoveOutline size={20} />
+        </button>
 
-    return (
-        <div>
-            <div className="flex items-center">
-                <button
-                    className="border text-gray-700 border-gray-200 p-2 rounded-xl"
-                    onClick={() => onQuantityChange(-1)}
-                >
-                    <IoRemoveOutline size={20} />
-                </button>
+        <span className="w-20 mx-3 px-5 bg-gray-200/55 py-1 text-center">{quantity}</span>
 
-                <span className="w-20 mx-3 px-5 bg-gray-200/55 py-1 text-center">{count}</span>
-
-                <button
-                    className="border text-gray-700 border-gray-200 p-2 rounded-xl"
-                    onClick={() => onQuantityChange(+1)}
-                >
-                    <IoAddOutline size={20} />
-                </button>
-            </div>
-        </div>
-    );
+        <button
+          className="border text-gray-700 border-gray-200 p-2 rounded-xl"
+          onClick={() => onValueChanged(+1)}
+        >
+          <IoAddOutline size={20} />
+        </button>
+      </div>
+    </div>
+  );
 };
