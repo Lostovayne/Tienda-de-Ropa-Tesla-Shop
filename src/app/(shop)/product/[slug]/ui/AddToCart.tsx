@@ -15,16 +15,15 @@ const AddToCart = ({ product }: Props) => {
 
   const addToCart = () => {
     setPosted(true);
-    console.log({
-      size,
-      quantity,
-    });
+    console.log({ size, quantity,product});
+    // TODO: Add to cart
+  
   };
 
   return (
     <>
       {posted && !size && (
-        <span className="text-red-800 py-2 font-medium text-sm px-4 bg-red-100 fade-in">
+        <span className="bg-red-100 px-4 py-2 font-medium text-red-800 text-sm fade-in">
           Debe de seleccionar una talla
         </span>
       )}
@@ -34,7 +33,7 @@ const AddToCart = ({ product }: Props) => {
       {/* Selector de Cantidad */}
       <QuantitySelector quantity={quantity} onQuantityChanged={setQuantity} />
       {/* Button */}
-      <button className="btn-primary my-5" onClick={addToCart}>
+      <button className="my-5 btn-primary" onClick={addToCart}>
         Agregar al carrito
       </button>
     </>
