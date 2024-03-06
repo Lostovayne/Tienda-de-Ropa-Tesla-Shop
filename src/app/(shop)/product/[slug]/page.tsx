@@ -38,24 +38,24 @@ export default async function ProductPage({ params }: Props) {
   const product = await getProductBySlug(slug);
 
   if (!product) {
-    notFound();
+   notFound();
   }
 
   return (
-    <section className="mt-5 mb-20 grid grid-cols-1 xl:grid-cols-3 gap-3">
+    <section className="gap-3 grid grid-cols-1 xl:grid-cols-3 mt-5 mb-20">
       {/* Slideshow */}
 
-      <div className="col-span-1 xl:col-span-2 ">
-        <ProductSlideshow title={product.title} images={product.images} className="max-w-2xl mx-auto " />
+      <div className="col-span-1 xl:col-span-2">
+        <ProductSlideshow title={product.title} images={product.images} className="mx-auto max-w-2xl" />
       </div>
 
       {/* Detalles */}
 
-      <div className="col-span-1 px-5 xl:mt-12 ">
+      <div className="col-span-1 xl:mt-12 px-5">
         <StockLabel slug={product.slug} />
         <h1 className={cn("text-xl font-bold antialiased", titleFont.className)}>{product.title}</h1>
-        <p className="text-lg mb-5 font-semibold">${product.price}</p>
-        <AddToCart product={product} />
+        <p className="mb-5 font-semibold text-lg">${product.price}</p>
+        <AddToCart product={product!} />
         {/* Descripcion */}
         <h3 className="font-bold text-sm">Descripción</h3>
         <p className="font-normal text-base">{product.description}</p>
