@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 
 interface State {
   cart: CartProduct[];
+  getTotalItems: () => number;
   addProductToCart: (product: CartProduct) => void;
   //updateProductQuantity
   //removeProductFromCart
@@ -14,7 +15,13 @@ export const useCartStore = create<State>()(
     (set, get) => ({
       cart: [],
 
-      // Metodos
+      // Métodos
+
+      getTotalItems: () => {
+        const { cart } = get();
+        return cart.reduce((total, item) => total + item.quantity, 0);
+      },
+
       addProductToCart: (product: CartProduct) => {
         const { cart } = get();
         // 1. Revisar si el producto existe en el carrito con la talla seleccionada
@@ -25,7 +32,7 @@ export const useCartStore = create<State>()(
           return;
         }
 
-        // 2. Si llega aqui el producto existe entonces toca incrementarlo por talla
+        // 2. Si llega aquí el producto existe entonces toca incrementarlo por talla
         const updatedCartProducts = cart.map((item) => {
           if (item.id === product.id && item.size === product.size) {
             return { ...item, quantity: item.quantity + product.quantity };
