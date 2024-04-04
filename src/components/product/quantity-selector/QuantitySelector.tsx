@@ -23,16 +23,16 @@ export const QuantitySelector = ({ quantity, onQuantityChanged }: Props) => {
     <div>
       <div className="flex items-center">
         <button
-          className="border text-gray-700 border-gray-200 p-2 rounded-xl"
+          className="border-gray-200 p-2 border rounded-xl text-gray-700"
           onClick={() => onValueChanged(-1)}
         >
           <IoRemoveOutline size={20} />
         </button>
 
-        <span className="w-20 mx-3 px-5 bg-gray-200/55 py-1 text-center">{quantity}</span>
+        <span className="bg-gray-200/55 mx-3 px-5 py-1 w-20 text-center">{quantity}</span>
 
         <button
-          className="border text-gray-700 border-gray-200 p-2 rounded-xl"
+          className="border-gray-200 p-2 border rounded-xl text-gray-700"
           onClick={() => onValueChanged(+1)}
         >
           <IoAddOutline size={20} />
