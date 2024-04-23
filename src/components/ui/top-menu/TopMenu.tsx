@@ -22,10 +22,7 @@ export const TopMenu = () => {
       <div>
         <Link href="/">
           <span className={`${titleFont.className} antialiased font-bold 2xl:text-2xl`}>Tesla</span>
-          <span className={cn(titleFont.className, "font-semibold text-gray-700 2xl:text-2xl")}>
-            {" "}
-            | Shop
-          </span>
+          <span className={cn(titleFont.className, "font-semibold text-gray-700 2xl:text-2xl")}> | Shop</span>
         </Link>
       </div>
 
@@ -58,7 +55,7 @@ export const TopMenu = () => {
         <Link href="/search" className="mr-1">
           <IoSearchOutline className="w-5 xl:w-6 h-5 xl:h-6" />
         </Link>
-        <Link href="/cart">
+        <Link href={totalItemsInCart === 0 ? "/empty" : "/cart"}>
           <div className="relative">
             {loaded && totalItemsInCart > 0 && (
               <span className="-top-1 -right-2 absolute bg-red-500 px-1 rounded-full font-bold text-white text-xs">

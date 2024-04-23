@@ -1,7 +1,7 @@
 import { Title } from "@/components";
 import Link from "next/link";
 import { ProductsInCart } from "./ui/ProductsInCart";
-
+import { OrderSummary } from "./ui/OrderSummary";
 
 export default function CartPage() {
   // redirect("/empty");
@@ -25,19 +25,7 @@ export default function CartPage() {
           <section>
             <div className="bg-white shadow-lg p-7 rounded-xl">
               <h2 className="mb-2 font-semibold text-xl">Resumen de orden</h2>
-              <div className="grid grid-cols-2">
-                <span className="font-medium text-base">No. Productos</span>
-                <span className="text-right text-base">3 artículos</span>
-
-                <span className="font-medium text-base">Subtotal</span>
-                <span className="text-right text-base">$ 100</span>
-
-                <span className="text-base">Impuestos (15%) </span>
-                <span className="text-right text-base">$ 100</span>
-
-                <span className="mt-5 text-xl">Total:</span>
-                <span className="text-right mt-5 text-xl">$ 100</span>
-              </div>
+              <OrderSummary />
               <div className="mt-5 mb-2 w-full">
                 <Link className="flex justify-center btn-primary" href="/checkout/address">
                   Checkout
