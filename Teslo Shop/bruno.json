@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Teslo Shop",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
