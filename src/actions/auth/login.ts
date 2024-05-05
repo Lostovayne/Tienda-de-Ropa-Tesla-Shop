@@ -10,9 +10,7 @@ export async function authenticate(
   formData: FormData
 ) {
   try {
-
-    await sleep(2)
-
+    // await sleep(2);
     await signIn("credentials", Object.fromEntries(formData));
   } catch (error) {
     // if (error instanceof AuthError) {
@@ -23,7 +21,7 @@ export async function authenticate(
     //       return "Parece que ocurrio un error o algo salio mal.";
     //   }
     // }
-    return "Parece que ocurrio un error o algo salio mal.";
+    return "CredentialsSignin";
 
     throw error;
   }

@@ -3,14 +3,15 @@
 import { authenticate } from "@/actions";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
+import { IoInformationCircleOutline } from "react-icons/io5";
 
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined);
 
   const [isLoading, setisLoading] = useState(false);
 
-  if(isLoading) {
+  if (isLoading) {
     console.log({ state });
   }
 
@@ -36,9 +37,23 @@ export const LoginForm = () => {
         name="password"
       />
 
-      <button type="submit" className="cursor-pointer btn-primary">
-        Ingresar
-      </button>
+      {/* Errors */}
+      <div
+        className="flex h-8 items-center space-x-1 mb-1"
+        aria-label="polite"
+        aria-atomic="true"
+      >
+        {state === "CredentialsSignin" && (
+          <div className="bg-rose-100/70 w-full flex items-center justify-center py-2 ">
+            <IoInformationCircleOutline className="text-rose-500 text-xl mr-1" />
+            <p className="text-sm font-medium text-rose-500">
+              Credenciales incorrectas
+            </p>
+          </div>
+        )}
+      </div>
+
+      <LoginButton />
 
       {/* divisor l ine */}
       <div className="flex items-center my-5">
@@ -56,3 +71,20 @@ export const LoginForm = () => {
     </form>
   );
 };
+
+function LoginButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      disabled={pending}
+      type="submit"
+      className="cursor-pointer btn-primary
+      disabled:bg-gray-300
+      disabled:opacity-65 
+      "
+    >
+      Ingresar
+    </button>
+  );
+}
