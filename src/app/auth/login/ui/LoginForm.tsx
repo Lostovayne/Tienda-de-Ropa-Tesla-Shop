@@ -2,14 +2,15 @@
 
 import { authenticate } from "@/actions";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { IoInformationCircleOutline } from "react-icons/io5";
 
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined);
-
   const [isLoading, setisLoading] = useState(false);
+  const router = useRouter();
 
   if (isLoading) {
     console.log({ state });
@@ -18,6 +19,12 @@ export const LoginForm = () => {
   useEffect(() => {
     setisLoading(true);
   }, []);
+
+  useEffect(() => {
+    if (state === "Success") {
+      router.replace("/");
+    }
+  }, [state, router]);
 
   if (!isLoading) return null;
 
@@ -43,7 +50,7 @@ export const LoginForm = () => {
         aria-label="polite"
         aria-atomic="true"
       >
-        {state === "CredentialsSignin" && (
+        {state === "Credentials SignIn" && (
           <div className="bg-rose-100/70 w-full flex items-center justify-center py-2 ">
             <IoInformationCircleOutline className="text-rose-500 text-xl mr-1" />
             <p className="text-sm font-medium text-rose-500">
