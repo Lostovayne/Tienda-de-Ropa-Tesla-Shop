@@ -2,7 +2,11 @@
 import { logout } from "@/actions";
 import { useUiStore } from "@/store";
 import clsx from "clsx";
+import { Session } from "next-auth";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import {
   IoCloseOutline,
   IoDocumentsOutline,
@@ -18,6 +22,28 @@ import {
 export const Sidebar = () => {
   const isSideMenuOpen = useUiStore((state) => state.isSideMenuOpen);
   const closeSideMenu = useUiStore((state) => state.closeSideMenu);
+
+  //router
+  const router = useRouter();
+
+  // tomar la sesion del lado del cliente
+  const { data: session } = useSession();
+
+  const  isAuthenticated: boolean | null = !!session?.user;
+
+  // revisar la authenticacion del usuario
+
+  const LogoutUser = async () => {
+    closeSideMenu();
+    await logout();
+    console.log("Sesion Cerrada");
+    router.push("/auth/login");
+  };
+
+  const LoginUser = () => {
+    closeSideMenu();
+    router.push("/auth/login");
+  };
 
   return (
     <div>
@@ -64,10 +90,7 @@ export const Sidebar = () => {
           onClick={() => closeSideMenu()}
           className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
         >
-          <IoPersonOutline
-            size={25}
-            className=" text-gray-500 cursor-pointer"
-          />
+          <IoPersonOutline size={25} className=" text-gray-500 cursor-pointer" />
           <span className="text-gray-600">Perfil</span>
         </Link>
 
@@ -75,37 +98,27 @@ export const Sidebar = () => {
           href="/"
           className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
         >
-          <IoTicketOutline
-            size={25}
-            className=" text-gray-500 cursor-pointer"
-          />
+          <IoTicketOutline size={25} className=" text-gray-500 cursor-pointer" />
           <span className="text-gray-600">Ordenes</span>
         </Link>
 
-        <Link
-          href="/auth/login"
-          onClick={() => closeSideMenu()}
-          className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
-        >
-          <IoLogInOutline size={25} className=" text-gray-500 cursor-pointer" />
-          <span className="text-gray-600">Ingresar</span>
-        </Link>
-
-        <Link
-          href="/"
-          className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
-          onClick={() => {
-            closeSideMenu();
-            logout();
-          }}
-        >
-          <IoLogOutOutline
-            size={25}
-            className=" text-gray-500 cursor-pointer"
-          />
-          <span className="text-gray-600">Salir</span>
-        </Link>
-
+        {isAuthenticated ? (
+          <button
+            className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
+            onClick={() => LogoutUser()}
+          >
+            <IoLogOutOutline size={25} className=" text-gray-500 cursor-pointer" />
+            <span className="text-gray-600">Salir</span>
+          </button>
+        ) : (
+          <button
+            className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
+            onClick={() => LoginUser()}
+          >
+            <IoLogInOutline size={25} className=" text-gray-500 cursor-pointer" />
+            <span className="text-gray-600">Iniciar Sesion</span>
+          </button>
+        )}
         {/* Line Separator */}
         <div className="h-px bg-gray-200 my-10" />
 
@@ -121,10 +134,7 @@ export const Sidebar = () => {
           href="/"
           className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
         >
-          <IoDocumentsOutline
-            size={25}
-            className=" text-gray-500 cursor-pointer"
-          />
+          <IoDocumentsOutline size={25} className=" text-gray-500 cursor-pointer" />
           <span className="text-gray-600">Ordenes</span>
         </Link>
 
@@ -132,10 +142,7 @@ export const Sidebar = () => {
           href="/"
           className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
         >
-          <IoPeopleOutline
-            size={25}
-            className=" text-gray-500 cursor-pointer"
-          />
+          <IoPeopleOutline size={25} className=" text-gray-500 cursor-pointer" />
           <span className="text-gray-600">Salir</span>
         </Link>
       </nav>
