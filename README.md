@@ -45,6 +45,7 @@ El proyecto tiene los siguientes scripts que puedes ejecutar:
 - `lint`: Ejecuta el linter del proyecto.
 
 ## Demo 
+![screely-1717710304262](https://github.com/Lostovayne/Tienda-de-Ropa-Tesla-Shop/assets/92962731/b34bda60-645e-4934-b282-04d3f668e6b1)
 
 
 
