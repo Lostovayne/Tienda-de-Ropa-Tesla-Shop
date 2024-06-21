@@ -48,6 +48,11 @@ El proyecto tiene los siguientes scripts que puedes ejecutar:
 ![screely-1717710304262](https://github.com/Lostovayne/Tienda-de-Ropa-Tesla-Shop/assets/92962731/b34bda60-645e-4934-b282-04d3f668e6b1)
 
 
+## Datos de prueba
+- Se encuentran en el Seed de prueba que se carga para correr la base de datos.
+    
+
+
 
 ## Dependencias
 
