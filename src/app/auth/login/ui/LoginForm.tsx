@@ -2,7 +2,7 @@
 
 import { authenticate } from "@/actions";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { IoInformationCircleOutline } from "react-icons/io5";
@@ -10,7 +10,7 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined);
   const [isLoading, setisLoading] = useState(false);
-  const router = useRouter();
+  // const router = useRouter();
 
   // if (isLoading) {
   //   console.log({ state });
@@ -25,7 +25,7 @@ export const LoginForm = () => {
       // router.push("/");
       window.location.href = "/";
     }
-  }, [state, router]);
+  }, [state]);
 
   if (!isLoading) return null;
 

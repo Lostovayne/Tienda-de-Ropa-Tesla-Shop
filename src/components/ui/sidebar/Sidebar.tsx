@@ -2,11 +2,9 @@
 import { logout } from "@/actions";
 import { useUiStore } from "@/store";
 import clsx from "clsx";
-import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import {
   IoCloseOutline,
   IoDocumentsOutline,
@@ -29,7 +27,9 @@ export const Sidebar = () => {
   // tomar la sesion del lado del cliente
   const { data: session } = useSession();
 
-  const  isAuthenticated: boolean | null = !!session?.user;
+  const role = session?.user?.role as "admin" | "user";
+
+  const isAuthenticated: boolean | null = !!session?.user;
 
   // revisar la authenticacion del usuario
 
@@ -90,7 +90,10 @@ export const Sidebar = () => {
           onClick={() => closeSideMenu()}
           className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
         >
-          <IoPersonOutline size={25} className=" text-gray-500 cursor-pointer" />
+          <IoPersonOutline
+            size={25}
+            className=" text-gray-500 cursor-pointer"
+          />
           <span className="text-gray-600">Perfil</span>
         </Link>
 
@@ -98,7 +101,10 @@ export const Sidebar = () => {
           href="/"
           className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
         >
-          <IoTicketOutline size={25} className=" text-gray-500 cursor-pointer" />
+          <IoTicketOutline
+            size={25}
+            className=" text-gray-500 cursor-pointer"
+          />
           <span className="text-gray-600">Ordenes</span>
         </Link>
 
@@ -107,7 +113,10 @@ export const Sidebar = () => {
             className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
             onClick={() => LogoutUser()}
           >
-            <IoLogOutOutline size={25} className=" text-gray-500 cursor-pointer" />
+            <IoLogOutOutline
+              size={25}
+              className=" text-gray-500 cursor-pointer"
+            />
             <span className="text-gray-600">Salir</span>
           </button>
         ) : (
@@ -115,36 +124,54 @@ export const Sidebar = () => {
             className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
             onClick={() => LoginUser()}
           >
-            <IoLogInOutline size={25} className=" text-gray-500 cursor-pointer" />
+            <IoLogInOutline
+              size={25}
+              className=" text-gray-500 cursor-pointer"
+            />
             <span className="text-gray-600">Iniciar Sesion</span>
           </button>
         )}
-        {/* Line Separator */}
-        <div className="h-px bg-gray-200 my-10" />
 
-        <Link
-          href="/"
-          className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
-        >
-          <IoShirtOutline size={25} className=" text-gray-500 cursor-pointer" />
-          <span className="text-gray-600">Productos</span>
-        </Link>
+        {role === "admin" ? (
+          <>
+            <div className="h-px bg-gray-200 my-10" />
 
-        <Link
-          href="/"
-          className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
-        >
-          <IoDocumentsOutline size={25} className=" text-gray-500 cursor-pointer" />
-          <span className="text-gray-600">Ordenes</span>
-        </Link>
+            <Link
+              href="/"
+              className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
+            >
+              <IoShirtOutline
+                size={25}
+                className=" text-gray-500 cursor-pointer"
+              />
+              <span className="text-gray-600">Productos</span>
+            </Link>
 
-        <Link
-          href="/"
-          className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
-        >
-          <IoPeopleOutline size={25} className=" text-gray-500 cursor-pointer" />
-          <span className="text-gray-600">Salir</span>
-        </Link>
+            <Link
+              href="/"
+              className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
+            >
+              <IoDocumentsOutline
+                size={25}
+                className=" text-gray-500 cursor-pointer"
+              />
+              <span className="text-gray-600">Ordenes</span>
+            </Link>
+
+            <Link
+              href="/"
+              className="m-4 p-2 gap-2 flex items-end rounded-md font-medium transition-all hover:bg-gray-100"
+            >
+              <IoPeopleOutline
+                size={25}
+                className=" text-gray-500 cursor-pointer"
+              />
+              <span className="text-gray-600">Usuarios</span>
+            </Link>
+          </>
+        ) : (
+          ""
+        )}
       </nav>
     </div>
   );
