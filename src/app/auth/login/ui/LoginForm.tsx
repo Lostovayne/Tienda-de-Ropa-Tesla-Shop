@@ -10,11 +10,6 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined);
   const [isLoading, setisLoading] = useState(false);
-  // const router = useRouter();
-
-  // if (isLoading) {
-  //   console.log({ state });
-  // }
 
   useEffect(() => {
     setisLoading(true);
@@ -54,7 +49,9 @@ export const LoginForm = () => {
         {state === "Credentials SignIn" && (
           <div className="bg-rose-100/70 w-full flex items-center justify-center py-2 ">
             <IoInformationCircleOutline className="text-rose-500 text-xl mr-1" />
-            <p className="text-sm font-medium text-rose-500">Credenciales incorrectas</p>
+            <p className="text-sm font-medium text-rose-500">
+              Credenciales incorrectas
+            </p>
           </div>
         )}
       </div>
@@ -68,7 +65,10 @@ export const LoginForm = () => {
         <div className="flex-1 border-gray-500 border-t"></div>
       </div>
 
-      <Link href="/auth/new-account" className="text-center cursor-pointer btn-secondary">
+      <Link
+        href="/auth/new-account"
+        className="text-center cursor-pointer btn-secondary"
+      >
         Crear una nueva cuenta
       </Link>
     </form>

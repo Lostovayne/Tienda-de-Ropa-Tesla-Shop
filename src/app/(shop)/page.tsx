@@ -7,23 +7,24 @@ import { Pagination, ProductGrid, Title } from "@/components";
 import { redirect } from "next/navigation";
 
 interface Props {
-    searchParams: {
-        page?: string;
-    };
+  searchParams: {
+    page?: string;
+  };
 }
 
 export default async function Home({ searchParams }: Props) {
-    const page = searchParams.page ? parseInt(searchParams.page) : 1;
-    // Traer los elementos desde la bd
-    const { products, currentPage, totalPage } = await getPaginateProductsWithImages({ page });
-    if (products.length === 0) {
-        redirect("/");
-    }
-    return (
-        <>
-            <Title title="Tienda" subtitle="Todos los productos" />
-            <ProductGrid products={products} />
-            <Pagination totalPages={totalPage} />
-        </>
-    );
+  const page = searchParams.page ? parseInt(searchParams.page) : 1;
+  // Traer los elementos desde la bd
+  const { products, currentPage, totalPage } =
+    await getPaginateProductsWithImages({ page });
+  if (products.length === 0) {
+    redirect("/");
+  }
+  return (
+    <>
+      <Title title="Tienda" subtitle="Todos los productos" />
+      <ProductGrid products={products} />
+      <Pagination totalPages={totalPage} />
+    </>
+  );
 }
