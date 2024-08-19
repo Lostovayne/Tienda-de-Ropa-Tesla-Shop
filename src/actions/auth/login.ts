@@ -1,10 +1,7 @@
 "use server";
 import { signIn } from "@/auth.config";
 
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData
-) {
+export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
     // await sleep(2);
     await signIn("credentials", {
@@ -13,7 +10,6 @@ export async function authenticate(
     });
 
     return "Success";
-
   } catch (error) {
     if ((error as any).type === "CredentialsSignin") {
       return "Credentials SignIn";

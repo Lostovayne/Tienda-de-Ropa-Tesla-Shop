@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { registerUser } from "@/actions";
 import { cn } from "@/lib/twMerge";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -10,6 +12,12 @@ type FormInput = {
   password: string;
 };
 
+type RegisterResponse = {
+  message: string;
+  user?: undefined | { id: string; name: string; email: string };
+  ok: boolean;
+};
+
 export const RegisterForm = () => {
   const {
     register,
@@ -17,19 +25,22 @@ export const RegisterForm = () => {
     formState: { errors },
   } = useForm<FormInput>();
 
-  const onSubmit: SubmitHandler<FormInput> = async (data) => {
-    const { name, email, password } = data;
-    console.log({ name, email, password });
+  const [errorMessage, setErrorMessage] = useState("");
 
+  const onSubmit: SubmitHandler<FormInput> = async (data) => {
+    setErrorMessage("");
+    const { name, email, password } = data;
     //server actions
+    const resp: RegisterResponse = await registerUser(name, email, password);
+    if (!resp.ok) {
+      setErrorMessage(resp.message);
+    }
+
+    console.log(resp);
   };
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-      {/* {errors.name?.type === "required" && (
-        <p className="text-red-500">El nombre es obligatorio</p>
-      )} */}
-
       <label htmlFor="email">Nombre completo</label>
       <input
         className={cn("px-5 py-2 border bg-gray-200 rounded mb-5", {
@@ -42,9 +53,9 @@ export const RegisterForm = () => {
 
       <label htmlFor="email">Correo electrónico</label>
       <input
-         className={cn("px-5 py-2 border bg-gray-200 rounded mb-5", {
-            "border-red-500": errors.email?.type === "required",
-          })}
+        className={cn("px-5 py-2 border bg-gray-200 rounded mb-5", {
+          "border-red-500": errors.email?.type === "required",
+        })}
         type="email"
         {...register("email", {
           required: true,
@@ -54,14 +65,16 @@ export const RegisterForm = () => {
 
       <label htmlFor="email">Contraseña</label>
       <input
-         className={cn("px-5 py-2 border bg-gray-200 rounded mb-5", {
-            "border-red-500": errors.password?.type === "required",
-          })}
+        className={cn("px-5 py-2 border bg-gray-200 rounded mb-5", {
+          "border-red-500": errors.password?.type === "required",
+        })}
         type="password"
         {...register("password", {
           required: true,
         })}
       />
+
+      <span className="text-red-500 bg-red-200/60 text-center font-medium rounded-lg leading-8  mb-2">{errorMessage}</span>
 
       <button className="btn-primary">Crear Cuenta</button>
 

@@ -15,8 +15,7 @@ interface Props {
 export default async function Home({ searchParams }: Props) {
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
   // Traer los elementos desde la bd
-  const { products, currentPage, totalPage } =
-    await getPaginateProductsWithImages({ page });
+  const { products, currentPage, totalPage } = await getPaginateProductsWithImages({ page });
   if (products.length === 0) {
     redirect("/");
   }

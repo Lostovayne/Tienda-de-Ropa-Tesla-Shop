@@ -4,13 +4,7 @@ import React, { useState } from "react";
 import { cn } from "@/lib/twMerge";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
-import {
-  FreeMode,
-  Navigation,
-  Thumbs,
-  Pagination,
-  Autoplay,
-} from "swiper/modules";
+import { FreeMode, Navigation, Thumbs, Pagination, Autoplay } from "swiper/modules";
 import Image from "next/image";
 
 import "swiper/css";
