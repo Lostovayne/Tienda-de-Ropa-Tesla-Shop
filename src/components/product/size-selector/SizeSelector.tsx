@@ -1,5 +1,7 @@
+"use client";
 import type { Size } from "@/interfaces";
 import { cn } from "@/lib/twMerge";
+import { useEffect } from "react";
 
 interface Props {
   selectedSize: Size | undefined;
@@ -8,6 +10,12 @@ interface Props {
 }
 
 export const SizeSelector = ({ selectedSize, availableSizes, onSizeChanged }: Props) => {
+  useEffect(() => {
+    if (!selectedSize) {
+      onSizeChanged(availableSizes[0]);
+    }
+  }, [availableSizes, onSizeChanged, selectedSize]);
+
   return (
     <div className="my-5">
       <h3 className="mb-4 font-bold">Tallas disponibles</h3>

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { registerUser } from "@/actions";
+import { login, registerUser } from "@/actions";
 import { cn } from "@/lib/twMerge";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type FormInput = {
@@ -26,6 +27,7 @@ export const RegisterForm = () => {
   } = useForm<FormInput>();
 
   const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
     setErrorMessage("");
@@ -36,7 +38,11 @@ export const RegisterForm = () => {
       setErrorMessage(resp.message);
     }
 
-    console.log(resp);
+    // Hacer un login si se registra correctamente
+    await login(email.toLowerCase(), password);
+
+    router.push("/", { scroll: false });
+    router.refresh();
   };
 
   return (
@@ -74,7 +80,9 @@ export const RegisterForm = () => {
         })}
       />
 
-      <span className="text-red-500 bg-red-200/60 text-center font-medium rounded-lg leading-8  mb-2">{errorMessage}</span>
+      <span className="text-red-500 bg-red-200/60 text-center font-medium rounded-lg leading-8  mb-2">
+        {errorMessage}
+      </span>
 
       <button className="btn-primary">Crear Cuenta</button>
 
