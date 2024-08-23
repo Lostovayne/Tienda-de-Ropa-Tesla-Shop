@@ -11,6 +11,18 @@ export const authConfig: NextAuthConfig = {
   },
 
   callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isCheckout = !!nextUrl.pathname.startsWith("/checkout");
+
+      if (isCheckout) {
+        if (isLoggedIn) return true;
+        return Response.redirect(new URL("/auth/login", nextUrl));
+      }
+
+      return true;
+    },
+
     jwt: ({ token, user }) => {
       if (user) {
         token.data = user;
