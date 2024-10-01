@@ -14,26 +14,27 @@ La versión actual del proyecto es 0.1.0.
 - Instalar las dependencias `pnpm install`
 - Copiar las variables de .env.example en .env
 - Agregar los valores a las variables de entorno
-- Levantar el contenedor de docker ```docker compose up -d```
+- Levantar el contenedor de docker `docker compose up -d`
 - Migrar la BD para la seed
 - Ejecutar seed `pnpm seed`
 - Ejecutar el script `pnpm dev`
 - Abrir el navegador en http://localhost:3000
 
-## Prisma se está utilizando como ORM , sus comandos son 
+## Prisma se está utilizando como ORM , sus comandos son
+
 - [Prisma](https://prisma.io)
-- Instalacion de Prisma  `pnpm install prisma --save-dev`
+- Instalacion de Prisma `pnpm install prisma --save-dev`
 - Inicializar Prisma `pnpm dlx prisma init --datasource-provider PostgreSQL`
-- Crear el Schema de Prisma 
+- Crear el Schema de Prisma
 - Crear el Cliente de Prisma
 - Si ya se tiene una base de datos puede usarse el comando `pnpm prisma db pull` para crear el Schema basado en ella
 - Ejecutar el comando para la migracion `pnpm dlx prisma migrate dev --name nombreMigra`
 
 ## El proyecto usa un mini servidor de Node para la seed en base de datos.
+
 - Se instaló ts-node para ejecutar el script de Typescripts
 - `pnpm seed`
 - Esto corre el script que limpia la base de datos y agrega la data nueva
-
 
 ## Scripts
 
@@ -44,15 +45,19 @@ El proyecto tiene los siguientes scripts que puedes ejecutar:
 - `start`: Inicia el servidor de producción de Next.js.
 - `lint`: Ejecuta el linter del proyecto.
 
-## Demo 
+## Demo
+
 ![screely-1717710304262](https://github.com/Lostovayne/Tienda-de-Ropa-Tesla-Shop/assets/92962731/b34bda60-645e-4934-b282-04d3f668e6b1)
 
-
 ## Datos de prueba
+
 - Se encuentran en el Seed de prueba que se carga para correr la base de datos.
-    
 
+## Comandos de la BD
 
+- `npx prisma generate`
+- `npx prisma db push`
+- `npm run seed`
 
 ## Dependencias
 
@@ -88,10 +93,6 @@ El proyecto utiliza las siguientes dependencias de desarrollo:
 -lib - carpeta de bibliotecas
 -auth - carpeta de autenticación
 -shop - carpeta de tienda
-
-
-
-
 
 ## Licencia
 
