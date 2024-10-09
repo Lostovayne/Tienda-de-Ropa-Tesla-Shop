@@ -61,17 +61,6 @@ async function main() {
     });
   });
 
-  // countries.forEach(async (country) => {
-  //   await prisma.country.createMany({
-  //     data: [
-  //       {
-  //         id: country.id,
-  //         name: country.name,
-  //       },
-  //     ],
-  //   });
-  // });
-
   await prisma.country.createMany({
     data: countries,
   });
