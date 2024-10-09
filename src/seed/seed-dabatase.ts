@@ -8,6 +8,7 @@ async function main() {
     await prisma.productImage.deleteMany(),
     await prisma.product.deleteMany(),
     await prisma.category.deleteMany(),
+    await prisma.country.deleteMany(),
   ]);
 
   const { categories, products, users } = initialData;
@@ -60,15 +61,19 @@ async function main() {
     });
   });
 
-  countries.forEach(async (country) => {
-    await prisma.country.createMany({
-      data: [
-        {
-          id: country.id,
-          name: country.name,
-        },
-      ],
-    });
+  // countries.forEach(async (country) => {
+  //   await prisma.country.createMany({
+  //     data: [
+  //       {
+  //         id: country.id,
+  //         name: country.name,
+  //       },
+  //     ],
+  //   });
+  // });
+
+  await prisma.country.createMany({
+    data: countries,
   });
 
   console.log("Seed ejecutado correctamente");
