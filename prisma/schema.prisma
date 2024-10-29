@@ -6,9 +6,8 @@ generator client {
 }
 
 datasource db {
-    provider     = "postgresql"
-    url          = env("DATABASE_URL")
-    relationMode = "prisma"
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
 enum Size {
@@ -64,16 +63,35 @@ model ProductImage {
 }
 
 model User {
-    id            String    @id @default(uuid())
+    id            String       @id @default(uuid())
     name          String
-    email         String    @unique
+    email         String       @unique
     emailVerified DateTime?
     password      String
-    role          Role      @default(user)
+    role          Role         @default(user)
     image         String?
+    Address       UserAddress?
 }
 
 model Country {
-    id   String @id
-    name String
+    id      String        @id
+    name    String
+    Address UserAddress[]
+}
+
+model UserAddress {
+    id         String  @id @default(uuid())
+    firstName  String
+    lastName   String
+    address    String
+    address2   String
+    postalCode String
+    phone      String
+    city       String
+    // Relaciones
+    country    Country @relation(fields: [countryId], references: [id])
+    countryId  String
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String @unique
 }

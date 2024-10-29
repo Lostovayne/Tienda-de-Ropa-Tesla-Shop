@@ -1,7 +1,19 @@
 import { getCountries } from '@/actions/country/get-countries';
 import { Title } from '@/components';
 import { Country } from '@/interfaces/country.interface';
+import type { Viewport } from 'next';
 import AddressForm from './ui/AddressForm';
+
+export function generateViewport({ width, height }: Viewport) {
+	return {
+		width,
+		height,
+		deviceScaleFactor: 1,
+		isMobile: true,
+		hasTouch: false,
+		isLandscape: true,
+	};
+}
 
 export default async function AdressPage() {
 	const countries: Country[] = (await getCountries()) || [];

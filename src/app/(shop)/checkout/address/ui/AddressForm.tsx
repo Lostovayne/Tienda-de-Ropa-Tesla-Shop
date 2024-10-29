@@ -1,8 +1,9 @@
 'use client';
 
 import { Country } from '@/interfaces/country.interface';
+import { useAddressStore } from '@/store/address/address.store';
 import clsx from 'clsx';
-import type { FC } from 'react';
+import { useEffect, type FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface AddressFormProps {
@@ -25,14 +26,27 @@ const AddressForm: FC<AddressFormProps> = ({ countries }) => {
 		handleSubmit,
 		register,
 		formState: { isValid },
+		reset,
 	} = useForm<FormInput>({
 		defaultValues: {
-			// Todo : Obtener datos de la cuenta
+			// Obtener datos
+			...useAddressStore.getState().address,
 		},
 	});
 
+	const setAddress = useAddressStore((state) => state.setAddress);
+	const address = useAddressStore((state) => state.address);
+
+	useEffect(() => {
+		if (address.firstName) {
+			reset(address);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	const onSubmit = (data: FormInput) => {
-		console.log({ data });
+		console.log(data);
+		setAddress(data);
 	};
 	return (
 		<form
@@ -97,7 +111,7 @@ const AddressForm: FC<AddressFormProps> = ({ countries }) => {
 				<select
 					className='p-2 border rounded-md bg-gray-300/20'
 					{...register('country', { required: true })}>
-					<option value=''>[ Seleccione ]</option>
+					<option value=''>Seleccione</option>
 					{countries.map((country) => (
 						<option
 							key={country.id}
