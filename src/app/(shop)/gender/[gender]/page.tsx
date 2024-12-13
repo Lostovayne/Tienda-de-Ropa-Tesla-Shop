@@ -6,15 +6,22 @@ import { Gender } from "@prisma/client";
 import { notFound, redirect } from "next/navigation";
 
 interface Props {
-  params: {
+  params: Promise<{
     gender: Gender;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     page?: string;
-  };
+  }>;
 }
 
-export default async function CategoryPage({ params: { gender }, searchParams }: Props) {
+export default async function CategoryPage(props: Props) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
+
+  const {
+    gender
+  } = params;
+
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
 
   //* En caso de ingresarse un parametro en la url que no exista, redirigir a la pagina principal

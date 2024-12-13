@@ -8,12 +8,18 @@ import { IoCardOutline } from "react-icons/io5";
 const productsInCart = [initialData.products[0], initialData.products[1], initialData.products[2]];
 
 interface Props {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 }
 
-export default function OrderIdPage({ params: { id } }: Props) {
+export default async function OrderIdPage(props: Props) {
+    const params = await props.params;
+
+    const {
+        id
+    } = params;
+
     // Todo: verificar id de orden
     // redirect(/) en caso de no ser su id
 
