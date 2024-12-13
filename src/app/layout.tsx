@@ -70,7 +70,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='es'>
       <body
-        suppressHydrationWarning
         className={cn(
           'bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]',
           inter.className

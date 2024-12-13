@@ -2,9 +2,9 @@ export const revalidate = 60;
 
 //** Revalidar la pagina cada 60 segundos **/
 
-import { getPaginateProductsWithImages } from "@/actions";
-import { Pagination, ProductGrid, Title } from "@/components";
-import { redirect } from "next/navigation";
+import { getPaginateProductsWithImages } from '@/actions';
+import { Pagination, ProductGrid, Title } from '@/components';
+import { redirect } from 'next/navigation';
 
 interface Props {
   searchParams: Promise<{
@@ -18,11 +18,11 @@ export default async function Home(props: Props) {
   // Traer los elementos desde la bd
   const { products, currentPage, totalPage } = await getPaginateProductsWithImages({ page });
   if (products.length === 0) {
-    redirect("/");
+    redirect('/');
   }
   return (
     <>
-      <Title title="Tienda" subtitle="Todos los productos" />
+      <Title title='Tienda' subtitle='Todos los productos' />
       <ProductGrid products={products} />
       <Pagination totalPages={totalPage} />
     </>
